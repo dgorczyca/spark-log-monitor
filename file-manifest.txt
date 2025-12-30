@@ -1,0 +1,10 @@
+.spark-initial-sha
+PRD.md
+index.html
+src/App.tsx
+src/components/AddSectionDialog.tsx
+src/components/EmptyState.tsx
+src/components/SectionCard.tsx
+src/index.css
+src/lib/log-generator.ts
+src/lib/types.ts
