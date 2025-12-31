@@ -53,19 +53,19 @@ docker-compose up -d
 You can start both the backend server and the frontend development server concurrently:
 
 ```bash
-npm run dev
+npm run dev:all
 ```
 
 Or start them separately:
 
 **Backend (Port 3001):**
 ```bash
-npx ts-node server/index.ts
+npm run dev:server
 ```
 
 **Frontend (Port 5173):**
 ```bash
-npm run vite
+npm run dev
 ```
 
 ### 5. Simulate Logs
@@ -75,6 +75,38 @@ The application watches `app.log` in the root directory. You can manually append
 ```bash
 echo "[INFO] error 1" >> app.log
 ```
+
+## Troubleshooting
+
+### Log File Detection
+
+If the application doesn't seem to be picking up log changes:
+
+1.  **Check Backend Output**: When the backend starts, you should see:
+    ```
+    Watching ./app.log for changes...
+    ```
+    If you don't see this, the backend might not be running or stuck.
+
+2.  **Verify File Existence**: Ensure `app.log` exists in the root directory.
+    ```bash
+    ls -l app.log
+    ```
+    If it doesn't exist, the backend should create it automatically, but you can create it manually:
+    ```bash
+    touch app.log
+    ```
+
+3.  **Check Permissions**: Ensure the application has read/write permissions for the file.
+    ```bash
+    chmod 644 app.log
+    ```
+
+4.  **Test Watcher**: With the backend running, run this command in a separate terminal:
+    ```bash
+    echo "test log entry" >> app.log
+    ```
+    Check the backend terminal. If debugging is enabled or if you modify `server/watcher.ts` to log events, you should see activity. The current implementation silently processes matches, so check the dashboard for updates.
 
 ## Usage
 

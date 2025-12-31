@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 
 const dbConfig = {
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root', // Default, should be configured via env
     password: 'rootpassword', // Default
     database: 'log_monitor'
@@ -72,15 +72,18 @@ export const addSection = async (name: string, rule: string) => {
 };
 
 export const addMatch = async (sectionId: number, value: string) => {
-    // Check if this value already exists for this section
-    const [existing] = await pool.query('SELECT id FROM matches WHERE section_id = ? AND value = ?', [sectionId, value]);
-    const matches = existing as any[];
+    // Check the MOST RECENT match for this section
+    const [rows] = await pool.query(
+        'SELECT id, value FROM matches WHERE section_id = ? ORDER BY last_seen_at DESC LIMIT 1',
+        [sectionId]
+    );
+    const matches = rows as any[];
 
-    if (matches.length > 0) {
-        // Update last_seen_at
+    if (matches.length > 0 && matches[0].value === value) {
+        // If the most recent match has the same value, update its last_seen_at
         await pool.query('UPDATE matches SET last_seen_at = CURRENT_TIMESTAMP WHERE id = ?', [matches[0].id]);
     } else {
-        // Insert new match
+        // Otherwise (no matches or different value), insert a new match
         await pool.query('INSERT INTO matches (section_id, value, first_seen_at, last_seen_at) VALUES (?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)', [sectionId, value]);
     }
 };

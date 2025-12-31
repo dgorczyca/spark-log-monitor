@@ -1,0 +1,13 @@
+
+> spark-template@0.0.0 dev:server
+> nodemon --watch server --exec tsx server/index.ts
+
+[33m[nodemon] 3.1.11[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): server/**/*[39m
+[33m[nodemon] watching extensions: ts,json[39m
+[32m[nodemon] starting `tsx server/index.ts`[39m
+[dotenv@17.2.3] injecting env (1) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+Watching /home/dev/code/spark-log-monitor-git/app.log for changes...
+Server running at http://localhost:3001
+Database initialized

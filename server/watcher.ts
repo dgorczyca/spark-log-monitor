@@ -1,8 +1,11 @@
 import chokidar from 'chokidar';
 import fs from 'fs';
 import { getAllSections, addMatch } from './db';
+import dotenv from 'dotenv';
 
-const LOG_FILE = './app.log'; // Configurable
+dotenv.config();
+
+const LOG_FILE = process.env.LOG_FILE_PATH || './app.log'; // Configurable
 
 export const startWatcher = () => {
     // Ensure log file exists
@@ -37,8 +40,11 @@ export const startWatcher = () => {
                     if (!line.trim()) continue;
 
                     for (const section of sections) {
-                        if (line.includes(section.rule)) { // Simple string match as per "rule" description, could be regex
-                            await addMatch(section.id, line.trim());
+                        const matchIndex = line.indexOf(section.rule);
+                        if (matchIndex !== -1) {
+                            // Extract content starting from the rule match
+                            const content = line.substring(matchIndex).trim();
+                            await addMatch(section.id, content);
                         }
                     }
                 }

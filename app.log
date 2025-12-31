@@ -1,12 +1,4 @@
-System started
-ERROR: Test error message
-2023-10-27 10:00:00 ERROR: Connection failed
-2025-10-27 10:00:00 ERROR: Connection failed
-2026-11-27 10:00:00 ERROR: Connection failed
-Warning: Test warning message
-Middle Warning: Test warning message
-Middle Warning: Test warning message
-Middle Warning: Test warning message
-Warning: Test warning message[INFO] test_error 1
-[INFO] test_error 1
-[INFO] test_error 2
+2025-31-12 12:00:00 Event Occurred, setting was set to A
+2025-31-12 13:00:00 Event Occurred, setting was set to A
+2025-31-12 14:00:00 Event Occurred, setting was set to B
+2025-31-12 15:00:00 Event Occurred, setting was set to A
