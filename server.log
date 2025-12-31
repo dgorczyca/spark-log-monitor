@@ -11,3 +11,39 @@
 Watching /home/dev/code/spark-log-monitor-git/app.log for changes...
 Server running at http://localhost:3001
 Database initialized
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `tsx server/index.ts`[39m
+[dotenv@17.2.3] injecting env (1) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+Watching /home/dev/code/spark-log-monitor-git/app.log for changes...
+Server running at http://localhost:3001
+Database initialized
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `tsx server/index.ts`[39m
+[dotenv@17.2.3] injecting env (1) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Watching /home/dev/code/spark-log-monitor-git/app.log for changes...
+Server running at http://localhost:3001
+Database initialized
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `tsx server/index.ts`[39m
+[dotenv@17.2.3] injecting env (1) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+Watching /home/dev/code/spark-log-monitor-git/app.log for changes...
+Server running at http://localhost:3001
+Database initialized
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `tsx server/index.ts`[39m
+[dotenv@17.2.3] injecting env (1) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+Watching /home/dev/code/spark-log-monitor-git/app.log for changes...
+Server running at http://localhost:3001
+Database initialized
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `tsx server/index.ts`[39m
+[dotenv@17.2.3] injecting env (1) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+Watching /home/dev/code/spark-log-monitor-git/app.log for changes...
+Server running at http://localhost:3001
+Database initialized
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `tsx server/index.ts`[39m
+[dotenv@17.2.3] injecting env (1) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+Watching /home/dev/code/spark-log-monitor-git/app.log for changes...
+Server running at http://localhost:3001
+Database initialized

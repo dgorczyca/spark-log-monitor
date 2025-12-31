@@ -11,11 +11,19 @@ interface Match {
   last_seen_at: string;
 }
 
+interface SpanRule {
+  id: number;
+  name: string;
+  starts_with: string;
+  followed_by: string;
+}
+
 interface Section {
   id: number;
   name: string;
   rule: string;
   matches: Match[];
+  span_rules: SpanRule[];
 }
 
 function App() {
@@ -76,7 +84,7 @@ function App() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sections.map((section) => (
-            <SectionCard key={section.id} section={section} />
+            <SectionCard key={section.id} section={section} onUpdate={fetchSections} />
           ))}
         </div>
 

@@ -44,6 +44,18 @@ export const initDb = async () => {
       )
     `);
 
+        await pool.query(`
+      CREATE TABLE IF NOT EXISTS span_rules (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        section_id INT NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        starts_with VARCHAR(255) NOT NULL,
+        followed_by VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (section_id) REFERENCES sections(id) ON DELETE CASCADE
+      )
+    `);
+
         console.log('Database initialized');
     } catch (error) {
         console.error('Database initialization failed:', error);
@@ -54,13 +66,17 @@ export const getSections = async () => {
     const [rows] = await pool.query('SELECT * FROM sections');
     const sections = rows as any[];
 
-    // For each section, get the last 3 matches, ordered by last_seen_at
+    // For each section, get the last 3 matches and span rules
     const results = await Promise.all(sections.map(async (section) => {
         const [matches] = await pool.query(
             'SELECT * FROM matches WHERE section_id = ? ORDER BY last_seen_at DESC LIMIT 3',
             [section.id]
         );
-        return { ...section, matches };
+        const [spanRules] = await pool.query(
+            'SELECT * FROM span_rules WHERE section_id = ?',
+            [section.id]
+        );
+        return { ...section, matches, span_rules: spanRules };
     }));
 
     return results;
@@ -69,6 +85,18 @@ export const getSections = async () => {
 export const addSection = async (name: string, rule: string) => {
     const [result] = await pool.query('INSERT INTO sections (name, rule) VALUES (?, ?)', [name, rule]);
     return (result as any).insertId;
+};
+
+export const addSpanRule = async (sectionId: number, name: string, startsWith: string, followedBy: string) => {
+    const [result] = await pool.query(
+        'INSERT INTO span_rules (section_id, name, starts_with, followed_by) VALUES (?, ?, ?, ?)',
+        [sectionId, name, startsWith, followedBy]
+    );
+    return (result as any).insertId;
+};
+
+export const deleteSpanRule = async (id: number) => {
+    await pool.query('DELETE FROM span_rules WHERE id = ?', [id]);
 };
 
 export const addMatch = async (sectionId: number, value: string) => {
